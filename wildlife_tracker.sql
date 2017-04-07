@@ -110,7 +110,9 @@ CREATE TABLE sightings (
     id integer NOT NULL,
     animal_id integer,
     location character varying,
-    ranger_name character varying
+    ranger_name character varying,
+    endangered_animal_id integer,
+    "time" timestamp without time zone
 );
 
 
@@ -163,6 +165,11 @@ ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq
 --
 
 COPY animals (id, name) FROM stdin;
+3	Deer
+4	black bear
+5	Heron
+6	
+7	Rutherford
 \.
 
 
@@ -170,7 +177,7 @@ COPY animals (id, name) FROM stdin;
 -- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: CnC
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 2, true);
+SELECT pg_catalog.setval('animals_id_seq', 7, true);
 
 
 --
@@ -178,6 +185,9 @@ SELECT pg_catalog.setval('animals_id_seq', 2, true);
 --
 
 COPY endangered_animals (id, name, health, age) FROM stdin;
+3	Flying Donkey	Ill	Newborn
+4	Unicorn of Life	Ill	Newborn
+5	SOmehting	Ill	Newborn
 \.
 
 
@@ -185,14 +195,37 @@ COPY endangered_animals (id, name, health, age) FROM stdin;
 -- Name: endangered_animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: CnC
 --
 
-SELECT pg_catalog.setval('endangered_animals_id_seq', 2, true);
+SELECT pg_catalog.setval('endangered_animals_id_seq', 5, true);
 
 
 --
 -- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: CnC
 --
 
-COPY sightings (id, animal_id, location, ranger_name) FROM stdin;
+COPY sightings (id, animal_id, location, ranger_name, endangered_animal_id, "time") FROM stdin;
+10	10	Zone 5	Doug Less	\N	2017-04-07 14:43:25.737456
+6	3	Zone 7	Clint Wellworn	\N	\N
+7	0	Zone 7	Cherry Sunborn	\N	\N
+8	3			\N	\N
+9	0			\N	\N
+11	3	here	c	\N	\N
+12	0	Somewhere	Cherry Sunborn	\N	\N
+13	0	asdhf	adsf	\N	\N
+14	0	gh	gh	\N	\N
+15	0	Please Work	Chris Finney	3	\N
+16	0	Work again	Cherry Sunborn	4	\N
+17	3	WORK!	Please work!!	0	\N
+18	4	Everywhere	Chris Finney	0	\N
+19	4	My backyard	Me	0	\N
+20	0	here	Cherry Sunborn	3	\N
+21	5	Zone 4	Chris Finney	0	\N
+22	0	Somewhere	Joe Budden	4	\N
+23	0	The Boonies	Me Myself and I	3	\N
+24	0	asdf	adsf	5	\N
+25	3	alksdjflaksdjf;alskdjf;alskdfj	Clint Wellworn	0	2017-04-07 16:25:48.431003
+26	0	wherever	Chris Finney	3	2017-04-07 16:42:14.343966
+27	6	asdf	asdf	0	2017-04-07 16:47:43.7344
+28	7	asdfasdfasdf	asdf	0	2017-04-07 16:50:04.295875
 \.
 
 
@@ -200,7 +233,7 @@ COPY sightings (id, animal_id, location, ranger_name) FROM stdin;
 -- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: CnC
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 5, true);
+SELECT pg_catalog.setval('sightings_id_seq', 28, true);
 
 
 --
