@@ -23,15 +23,15 @@ public class App {
     post("/endangered_sighting", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
-      int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
+      int endangeredAnimalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(0, latLong, rangerName, endangeredAnimalIdSelected);
       sighting.save();
       model.put("sighting", sighting);
-      model.put("animals", EndangeredAnimal.all());
-      String animal = EndangeredAnimal.find(animalIdSelected).getName();
-      model.put("animal", animal);
-      model.put("template", "templates/success.vtl");
+      model.put("endangeredAnimals", EndangeredAnimal.all());
+      String endangeredAnimal = EndangeredAnimal.find(endangeredAnimalIdSelected).getName();
+      model.put("endangeredAnimal", endangeredAnimal);
+      response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -40,13 +40,13 @@ public class App {
       String rangerName = request.queryParams("rangerName");
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName, 0);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", Animal.all());
       String animal = Animal.find(animalIdSelected).getName();
       model.put("animal", animal);
-      model.put("template", "templates/success.vtl");
+      response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

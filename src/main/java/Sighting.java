@@ -6,17 +6,19 @@ import java.sql.Timestamp;
 
 public class Sighting {
   private int animal_id;
+  private int endangered_animal_id;
   private String location;
   private String ranger_name;
   private int id;
   private Timestamp time;
 
-  public Sighting(int animal_id, String location, String ranger_name) {
+  public Sighting(int animal_id, String location, String ranger_name, int endangered_animal_id) {
     this.animal_id = animal_id;
     this.location = location;
     this.ranger_name = ranger_name;
     this.id = id;
     this.time = time;
+    this.endangered_animal_id = endangered_animal_id;
   }
 
   public int getId() {
@@ -47,11 +49,12 @@ public class Sighting {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (animal_id, location, ranger_name) VALUES (:animal_id, :location, :ranger_name);";
+      String sql = "INSERT INTO sightings (animal_id, location, ranger_name, endangered_animal_id) VALUES (:animal_id, :location, :ranger_name, :endangered_animal_id);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("animal_id", this.animal_id)
         .addParameter("location", this.location)
         .addParameter("ranger_name", this.ranger_name)
+        .addParameter("endangered_animal_id", this.endangered_animal_id)
         .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
