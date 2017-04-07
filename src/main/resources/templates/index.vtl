@@ -3,7 +3,7 @@
   <p>System for tracking animal sightings</p>
 </div>
 
-<a href="/animal/new" class="btn btn-default btn-large">Add Animal to System</a>
+<a href="/animal/new" class="btn btn-default btn-large center-btn">Add Animal to System</a>
 <hr>
 
 <div class="row">
@@ -20,11 +20,11 @@
         </select>
       <div class="form-group">
         <label>Location</label>
-        <input class="form-control" type="text" name="latLong">
+        <input class="form-control" type="text" name="latLong" required>
       </div>
       <div class="form-group">
         <label>Your Name</label>
-        <input class="form-control" type="text" name="rangerName">
+        <input class="form-control" type="text" name="rangerName" required>
       </div>
       <button type="submit">Submit Report</button>
       #end
@@ -57,11 +57,11 @@
       </select>
       <div class="form-group">
         <label>Location</label>
-        <input class="form-control" type="text" name="latLong">
+        <input class="form-control" type="text" name="latLong" required>
       </div>
       <div class="form-group">
         <label>Your Name</label>
-        <input class="form-control" type="text" name="rangerName">
+        <input class="form-control" type="text" name="rangerName" required>
       </div>
       <button type="submit">Submit Report</button>
       #end
