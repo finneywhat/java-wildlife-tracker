@@ -37,6 +37,10 @@ public class Sighting {
     return ranger_name;
   }
 
+  public Timestamp getTime() {
+    return time;
+  }
+
   @Override
   public boolean equals(Object otherSighting) {
     if(!(otherSighting instanceof Sighting)) {
@@ -82,4 +86,13 @@ public class Sighting {
     }
   }
 
+  public String displayTime() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT time FROM sightings WHERE id = :id;";
+      Timestamp time = con.createQuery(sql)
+                          .addParameter("id", id)
+                          .executeAndFetchFirst(Timestamp.class);
+    } catch (IllegalArgumentException exception) { } 
+    return String.format("%1$TD %1$TT", time);
+  }
 }
