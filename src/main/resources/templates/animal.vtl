@@ -9,12 +9,13 @@
 <div class="col-md-offset-1">
   #foreach($sighting in $animal.getSightings())
     <div class="well col-md-3 sightings-margins">
-      <h4>Time of Sighting</h4><p>$sighting.displayTime()</p>
-      <h4>Location:</h4><p>$sighting.getLocation()</p>
+      <p><strong>Time of Sighting:</strong></p><p>$sighting.displayTime()</p>
       <hr>
-      <h4>Reported by:</h4><p>$sighting.getRangerName()</p>
+      <p><strong>Location:</strong> $sighting.getLocation()</p>
       <hr>
-      <h4>ID:</h4><p>$sighting.getId()</p>
+      <p><strong>Reported by:</strong> $sighting.getRangerName()</p>
+      <hr>
+      <p><strong>Sighting ID No.</strong> $sighting.getId()</p>
     </div>
   #end
 #end
