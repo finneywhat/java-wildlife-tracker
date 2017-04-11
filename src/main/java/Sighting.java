@@ -14,11 +14,11 @@ public class Sighting {
 
   public Sighting(int animal_id, String location, String ranger_name, int endangered_animal_id) {
     this.animal_id = animal_id;
+    this.endangered_animal_id = endangered_animal_id;
     this.location = location;
     this.ranger_name = ranger_name;
     this.id = id;
     this.time = time;
-    this.endangered_animal_id = endangered_animal_id;
   }
 
   public int getId() {
@@ -27,6 +27,10 @@ public class Sighting {
 
   public int getAnimalId() {
     return animal_id;
+  }
+
+  public int getEndangeredAnimalId() {
+    return endangered_animal_id;
   }
 
   public String getLocation() {
@@ -47,7 +51,12 @@ public class Sighting {
       return false;
     } else {
       Sighting newSighting = (Sighting) otherSighting;
-      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocation().equals(newSighting.getLocation()) && this.getRangerName().equals(newSighting.getRangerName());
+      return this.getLocation().equals(newSighting.getLocation()) &&
+             this.getRangerName().equals(newSighting.getRangerName()) &&
+            //  this.getTime().equals(newSighting.getTime()) &&
+             this.getAnimalId() == newSighting.getAnimalId() &&
+             this.getEndangeredAnimalId() == newSighting.getEndangeredAnimalId() &&
+             this.getId() == newSighting.getId();
     }
   }
 
@@ -93,6 +102,15 @@ public class Sighting {
                           .addParameter("id", id)
                           .executeAndFetchFirst(Timestamp.class);
     } catch (IllegalArgumentException exception) { }
-    return String.format("%1$TD %1$TT", time);
+    return String.format("%1$TD %1$Tr", time);
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM sightings * WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 }

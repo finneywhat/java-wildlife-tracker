@@ -46,6 +46,7 @@ public class SightingTest {
     testAnimal.save();
     Sighting testSighting = new Sighting (testAnimal.getId(), "45.472428, -121.946466", "Ranger Avery", 0);
     testSighting.save();
+    System.out.println(testSighting.getRangerName());
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
     testEndangeredAnimal.save();
     Sighting secondTestSighting = new Sighting (0, "45.472428, -121.946466", "Ranger Reese", testEndangeredAnimal.getId());
@@ -80,7 +81,14 @@ public class SightingTest {
     testSighting.save();
     Timestamp timeOfTestSighting = Sighting.find(testSighting.getId()).getTime();
     Timestamp rightNow = new Timestamp(new Date().getTime());
-    assertEquals(timeOfTestSighting, rightNow);
-    assertEquals(DateFormat.getInstance().format(timeOfTestSighting), DateFormat.getInstance().format(rightNow));
+    assertEquals(String.format("%1$TD %1$Tr", timeOfTestSighting), String.format("%1$TD %1$Tr", rightNow));
+  }
+
+  public void delete_removesObjectWithSameIdFromDB() {
+    Animal testAnimal = new Animal("Deer");
+    testAnimal.save();
+    Sighting testSighting = new Sighting(testAnimal.getId(), "45.472428, -121.946466", "Ranger Avery", 0);
+    testSighting.save();
+    assertEquals(null, Sighting.find(testAnimal.getId()));
   }
 }

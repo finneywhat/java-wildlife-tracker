@@ -4,10 +4,14 @@ import java.util.List;
 
 public class EndangeredAnimal implements DatabaseManagement {
   public String name;
-  public int id;
+  private int id;
   private String health;
   private String age;
 
+  public static final String ILL_HEALTH = "ill";
+  public static final String OKAY_HEALTH = "okay";
+  public static final String HEALTHY_HEALTH = "healthy";
+  
   public EndangeredAnimal(String name, String health, String age) {
     this.id = id;
     this.name = name;
