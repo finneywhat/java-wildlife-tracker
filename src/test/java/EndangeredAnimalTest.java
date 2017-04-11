@@ -22,6 +22,19 @@ public class EndangeredAnimalTest {
   }
 
   @Test
+  public void getAge_returnsAgeAttribute_true() {
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+    assertEquals("Young", testEndangeredAnimal.getAge());
+  }
+
+  @Test
+  public void getName_returnsNameCorectly_true() {
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+    assertEquals("Fox", testEndangeredAnimal.getName());
+  }
+
+
+  @Test
   public void save_assignsIdAndSavesObjectToDatabase() {
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
     testEndangeredAnimal.save();
@@ -65,12 +78,15 @@ public class EndangeredAnimalTest {
   // }
 
   @Test
-  public void udpate_updatesEndangeredAnimalProperties() {
-    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
-    testEndangeredAnimal.save();
-    testEndangeredAnimal.update("Ill", "Adult");
-    assertEquals("Ill", EndangeredAnimal.find(testEndangeredAnimal.getId()));
-    assertEquals("Adult", EndangeredAnimal.find(testEndangeredAnimal.getId()));
+  public void update_updatesEndangeredAnimalProperties() {
+    EndangeredAnimal test1 = new EndangeredAnimal("Fox", "Healthy", "Young");
+    test1.save();
+    test1.update("Foxy", "Ill", "Adult");
+    assertEquals("Foxy", EndangeredAnimal.find(test1.getId()).getName());
+    assertEquals("Ill", EndangeredAnimal.find(test1.getId()).getHealth());
+    assertEquals("Ill", test1.getHealth());
+    assertEquals("Adult", EndangeredAnimal.find(test1.getId()).getAge());
+    assertEquals("Adult", test1.getAge());
   }
 
   @Test

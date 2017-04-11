@@ -92,7 +92,7 @@ public class Sighting {
       Timestamp time = con.createQuery(sql)
                           .addParameter("id", id)
                           .executeAndFetchFirst(Timestamp.class);
-    } catch (IllegalArgumentException exception) { } 
+    } catch (IllegalArgumentException exception) { }
     return String.format("%1$TD %1$TT", time);
   }
 }

@@ -2,10 +2,9 @@ import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EndangeredAnimal {
+public class EndangeredAnimal implements DatabaseManagement {
   public String name;
   public int id;
-  // public boolean endangered;
   private String health;
   private String age;
 
@@ -42,6 +41,7 @@ public class EndangeredAnimal {
     }
   }
 
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO endangered_animals (name, health, age) VALUES (:name, :health, :age);";
@@ -92,15 +92,17 @@ public class EndangeredAnimal {
   //   }
   // }
 
-  public void update(String health, String age) {
+  public void update(String name, String health, String age) {
+    this.name = name;
     this.health = health;
     this.age = age;
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE endangered_animals SET (health=:health, age=:age) WHERE id=:id;";
+      String sql = "UPDATE endangered_animals SET name = :name, health = :health, age = :age WHERE id = :id;";
       con.createQuery(sql)
+        .addParameter("name", this.name)
         .addParameter("health", this.health)
         .addParameter("age", this.age)
-        .addParameter("id", id)
+        .addParameter("id", this.id)
         .executeUpdate();
     }
   }
@@ -115,6 +117,7 @@ public class EndangeredAnimal {
     }
   }
 
+  @Override
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM endangered_animals WHERE id = :id;";
