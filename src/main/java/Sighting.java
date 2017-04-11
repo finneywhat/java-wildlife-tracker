@@ -53,7 +53,6 @@ public class Sighting {
       Sighting newSighting = (Sighting) otherSighting;
       return this.getLocation().equals(newSighting.getLocation()) &&
              this.getRangerName().equals(newSighting.getRangerName()) &&
-            //  this.getTime().equals(newSighting.getTime()) &&
              this.getAnimalId() == newSighting.getAnimalId() &&
              this.getEndangeredAnimalId() == newSighting.getEndangeredAnimalId() &&
              this.getId() == newSighting.getId();

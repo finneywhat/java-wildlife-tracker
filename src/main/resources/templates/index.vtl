@@ -51,40 +51,40 @@
       <hr>
       <form action="/endangered_sighting" method="post">
         #if($endangeredAnimals.size() > 0)
-        <label>Select Animal</label>
-        <select name="endangeredAnimalSelected">
-          #foreach($endangered_animal in $endangeredAnimals)
-          <option value="$endangered_animal.getId()">$endangered_animal.getName()</option>
-          #end
-        </select>
-        <div class="form-group">
-          <label>Location</label>
-          <input class="form-control" type="text" name="latLong" required>
-        </div>
-        <div class="form-group">
-          <label>Your Name</label>
-          <input class="form-control" type="text" name="rangerName" required>
-        </div>
-        <button type="submit">Submit Report</button>
+
+          <label>Select Animal</label>
+          <select name="endangeredAnimalSelected">
+            #foreach($endangered_animal in $endangeredAnimals)
+            <option value="$endangered_animal.getId()">$endangered_animal.getName()</option>
+            #end
+          </select>
+
+          <div class="form-group">
+            <label>Location</label>
+            <input class="form-control" type="text" name="latLong" required>
+          </div>
+          <div class="form-group">
+            <label>Your Name</label>
+            <input class="form-control" type="text" name="rangerName" required>
+          </div>
+          <button type="submit">Submit Report</button>
         #else
-        <p>
-          To report a sighting, first add the animal to the database, then navigate back to create your report. Thanks!
-        </p>
+          <p>To report a sighting, first add the animal to the database, then navigate back to create your report. Thanks!</p>
         #end
       </form>
       <hr>
       <h3>Reported Sightings</h3>
 
       #if ($endangeredAnimals.size() == 0)
-      <a href="/animal/new">Add Animal to Database to Report a Sighting</a>
+        <a href="/animal/new">Add Animal to Database to Report a Sighting</a>
       #else
-      #foreach ($endangeredAnimal in $endangeredAnimals)
-      <a href="/endangered_animal/$endangeredAnimal.getId()" class="thumbnail">
-        <h4>$endangeredAnimal.getName()</h4>
-        <h4>$endangeredAnimal.getSightings().size() Reported Sighting(s)</h4>
-        <p>Click for details</p>
-      </a>
-      #end
+        #foreach ($endangeredAnimal in $endangeredAnimals)
+          <a href="/endangered_animal/$endangeredAnimal.getId()" class="thumbnail">
+            <h4>$endangeredAnimal.getName()</h4>
+            <h4>$endangeredAnimal.getSightings().size() Reported Sighting(s)</h4>
+            <p>Click for details</p>
+          </a>
+        #end
       #end
     </div>
   </div>

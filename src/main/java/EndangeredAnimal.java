@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndangeredAnimal implements DatabaseManagement {
-  public String name;
+  private String name;
   private int id;
   private String health;
   private String age;
@@ -11,7 +11,7 @@ public class EndangeredAnimal implements DatabaseManagement {
   public static final String ILL_HEALTH = "ill";
   public static final String OKAY_HEALTH = "okay";
   public static final String HEALTHY_HEALTH = "healthy";
-  
+
   public EndangeredAnimal(String name, String health, String age) {
     this.id = id;
     this.name = name;
@@ -75,26 +75,6 @@ public class EndangeredAnimal implements DatabaseManagement {
       return endangeredanimal;
     }
   }
-
-  // public void updateHealth(String health) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "UPDATE endangered_animals SET health=:health WHERE id=:id;";
-  //     con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .addParameter("health", health)
-  //       .executeUpdate();
-  //   }
-  // }
-  //
-  // public void updateAge(String age) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "UPDATE endangered_animals SET age=:age WHERE id=:id;";
-  //     con.createQuery(sql)
-  //       .addParameter("age", age)
-  //       .addParameter("id", id)
-  //       .executeUpdate();
-  //   }
-  // }
 
   public void update(String name, String health, String age) {
     this.name = name;
